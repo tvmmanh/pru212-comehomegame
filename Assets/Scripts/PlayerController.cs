@@ -1,3 +1,4 @@
+using Cainos.PixelArtPlatformer_VillageProps;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
@@ -16,6 +17,8 @@ namespace ComeHomeGame
         private BoxCollider2D boxCollider;
         private float wallJumpCooldown;
         private float horizontalInput;
+
+        private Chest currentChest;
 
         private void Awake()
         {
@@ -68,6 +71,18 @@ namespace ComeHomeGame
             {
                 wallJumpCooldown += Time.deltaTime;
             }
+
+            if(Input.GetKey(KeyCode.E) && currentChest != null)
+            {
+                if(currentChest.IsOpened)
+                {
+                    currentChest.Close();
+                }
+                else
+                {
+                    currentChest.Open();
+                }
+            }
         }
 
         private void Jump()
@@ -101,6 +116,22 @@ namespace ComeHomeGame
         {
             RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, new Vector2(transform.localScale.x, 0), 0.1f, wallLayer);
             return raycastHit.collider != null;
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.gameObject.CompareTag("Chest"))
+            {
+                currentChest = collision.gameObject.GetComponent<Chest>();
+            }
+        }
+
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            if (collision.gameObject.CompareTag("Chest"))
+            {
+                currentChest = null;
+            }
         }
     }
 }

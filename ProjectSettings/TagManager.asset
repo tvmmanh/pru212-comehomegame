@@ -6,6 +6,7 @@ TagManager:
   tags:
   - jump
   - Ground
+  - Chest
   layers:
   - Default
   - TransparentFX
@@ -42,4 +43,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 3429463575
+    locked: 0
+  - name: Foreground
+    uniqueID: 3018718889
+    locked: 0
+  - name: Player
+    uniqueID: 3342361057
+    locked: 0
+  - name: Ground
+    uniqueID: 3281268225
     locked: 0

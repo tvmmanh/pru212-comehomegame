@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - jump
+  - Ground
+  - Chest
   layers:
   - Default
   - TransparentFX
@@ -11,7 +14,7 @@ TagManager:
   - 
   - Water
   - UI
-  - Climbing
+  - Ground
   - 
   - 
   - 
@@ -38,15 +41,18 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Background
-    uniqueID: 1099038997
-    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Foreground
-    uniqueID: 360806605
+  - name: Background
+    uniqueID: 3429463575
     locked: 0
-  - name: Climbing
-    uniqueID: 3497557945
+  - name: Foreground
+    uniqueID: 3018718889
+    locked: 0
+  - name: Player
+    uniqueID: 3342361057
+    locked: 0
+  - name: Ground
+    uniqueID: 3281268225
     locked: 0

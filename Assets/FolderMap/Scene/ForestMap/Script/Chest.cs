@@ -20,12 +20,18 @@ namespace Cainos.PixelArtPlatformer_VillageProps
                 animator.SetBool("IsOpened", isOpened);
             }
         }
+
+        private bool hasBeenOpened = false;
         private bool isOpened;
 
         [FoldoutGroup("Runtime"),Button("Open"), HorizontalGroup("Runtime/Button")]
         public void Open()
         {
-            IsOpened = true;
+            if (!hasBeenOpened)
+            {
+                IsOpened = true;
+                hasBeenOpened = true;
+            }
         }
 
         [FoldoutGroup("Runtime"), Button("Close"), HorizontalGroup("Runtime/Button")]

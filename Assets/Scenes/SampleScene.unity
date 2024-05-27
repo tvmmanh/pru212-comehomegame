@@ -12315,7 +12315,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -13048,7 +13048,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
     oldSize: {x: 1.0625, y: 0.9375}
-    newSize: {x: 1.0625, y: 0.9375}
+    newSize: {x: 1.1875, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -13080,12 +13080,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1562198927}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.490016, y: 3.1880832, z: 0.85179037}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1064.5881, y: -468.68655, z: 1.9742787}
+  m_LocalScale: {x: 2.3177989, y: 2.3177989, z: 2.3177989}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 2037586050}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1581378348
 GameObject:
@@ -13586,6 +13586,7 @@ RectTransform:
   m_Children:
   - {fileID: 1771672069}
   - {fileID: 1309753361}
+  - {fileID: 1562198928}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -13845,6 +13846,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3615272710834565069, guid: cea950ff3b9b0804f967eaec919f19f7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -46.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3615272710834565069, guid: cea950ff3b9b0804f967eaec919f19f7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -13.95
+      objectReference: {fileID: 0}
     - target: {fileID: 6930122694965717508, guid: cea950ff3b9b0804f967eaec919f19f7, type: 3}
       propertyPath: m_Name
       value: PF Village Props - Chest Golden
@@ -14038,10 +14047,9 @@ SceneRoots:
   - {fileID: 200221113}
   - {fileID: 923307891}
   - {fileID: 858993401}
-  - {fileID: 1562198928}
+  - {fileID: 323580478}
   - {fileID: 2037586050}
   - {fileID: 247678791}
-  - {fileID: 323580478}
   - {fileID: 1262065730}
   - {fileID: 1013597520}
   - {fileID: 1024311325}

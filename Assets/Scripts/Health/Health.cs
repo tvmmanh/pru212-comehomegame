@@ -38,6 +38,8 @@ public class Health : MonoBehaviour
         }
     }
 
+
+
     public void Healing(float _value)
     {
         currentHealth = Mathf.Clamp(currentHealth + _value, 0, startingHealth);

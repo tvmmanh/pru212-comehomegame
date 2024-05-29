@@ -302,6 +302,7 @@ GameObject:
   - component: {fileID: 128142115}
   - component: {fileID: 128142114}
   - component: {fileID: 128142113}
+  - component: {fileID: 128142116}
   m_Layer: 0
   m_Name: Tiles_1
   m_TagString: Untagged
@@ -421,6 +422,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &128142116
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 128142112}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &140066691
 GameObject:
   m_ObjectHideFlags: 0
@@ -1028,6 +1056,7 @@ GameObject:
   - component: {fileID: 210621156}
   - component: {fileID: 210621155}
   - component: {fileID: 210621154}
+  - component: {fileID: 210621157}
   m_Layer: 0
   m_Name: Tiles_9
   m_TagString: Untagged
@@ -1147,6 +1176,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &210621157
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 210621153}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &219198923
 GameObject:
   m_ObjectHideFlags: 0
@@ -1907,6 +1963,7 @@ GameObject:
   - component: {fileID: 419592986}
   - component: {fileID: 419592985}
   - component: {fileID: 419592991}
+  - component: {fileID: 419592992}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1926,9 +1983,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2434171efe602f042a0a3d2b9cb4f4b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Char_speed: 0
-  wSpeed: 8
-  rSpeedl: 12
+  speed: 0
+  jumpPower: 0
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1839735485 &419592986
 Tilemap:
   m_ObjectHideFlags: 0
@@ -2118,6 +2180,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f914e460562aa94cb2b9f844d6867ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &419592992
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 419592984}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3d4048623485f2140a6d39bff8ba6ae5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &431933320
 GameObject:
   m_ObjectHideFlags: 0

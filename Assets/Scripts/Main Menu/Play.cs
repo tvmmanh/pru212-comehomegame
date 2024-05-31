@@ -8,7 +8,7 @@ public class Play : MonoBehaviour
     // Start is called before the first frame update
     public void PlayButton()
     {
-        SceneManager.LoadSceneAsync(1);
+        SceneManager.LoadSceneAsync(2);
     }
     public void Quit()
     {

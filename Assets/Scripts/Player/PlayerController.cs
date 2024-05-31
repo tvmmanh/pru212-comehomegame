@@ -133,5 +133,10 @@ namespace ComeHomeGame
                 currentChest = null;
             }
         }
+
+        public bool canAttack()
+        {
+            return horizontalInput == 0 && isGrounded() && !onWall();
+        }
     }
 }

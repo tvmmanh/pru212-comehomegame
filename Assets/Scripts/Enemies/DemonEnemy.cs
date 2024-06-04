@@ -16,6 +16,9 @@ public class DemonEnemy : MonoBehaviour
     [Header("Player Layer")]
     [SerializeField] private LayerMask playerLayer;
     private float coolDownTimer = Mathf.Infinity;
+    
+    [Header("Attack Sound")]
+    [SerializeField] private AudioClip attackSound;
 
     private Animator anm;
     private Health playerHealth;
@@ -34,10 +37,11 @@ public class DemonEnemy : MonoBehaviour
 
         if (PlayerInSight())
         {
-            if(coolDownTimer >= attackCoolDown)
+            if(coolDownTimer >= attackCoolDown && playerHealth.currentHealth > 0)
             {
                 coolDownTimer = 0;
                 anm.SetTrigger("attacking");
+                SoundManage.instance.PlaySound(attackSound);
             }
         }
 

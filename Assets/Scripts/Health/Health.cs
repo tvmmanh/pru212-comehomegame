@@ -20,6 +20,13 @@ public class Health : MonoBehaviour
     [SerializeField] private int numberOfFlashes;
     private SpriteRenderer spriteRender;
 
+    [Header("Components")]
+    [SerializeField] private Behaviour[] components;
+    
+    [Header("Death Sound")]
+    [SerializeField] private AudioClip deathSound;
+    [SerializeField] private AudioClip hurtSound;
+
     private void Awake()
     {
         currentHealth = startingHealth;
@@ -35,12 +42,15 @@ public class Health : MonoBehaviour
         {
             anm.SetTrigger("hurt");
             StartCoroutine(Invunerability());
+            SoundManage.instance.PlaySound(hurtSound);
         }
         else
         {
             if (!dead)
             {
-                anm.SetTrigger("dead");
+                anm.SetTrigger("die");
+
+                /*  
                 //Player
                 if(GetComponent<PlayerController>() != null)
                 {
@@ -56,9 +66,17 @@ public class Health : MonoBehaviour
                 if(GetComponent<DemonEnemy>() != null)
                 {
                     GetComponent<DemonEnemy>().enabled = false;
+                } 
+                */
+
+                foreach (Behaviour behave in components)
+                {
+                    behave.enabled = false;
                 }
 
                 dead = true;
+
+                SoundManage.instance.PlaySound(deathSound);
             }
         }
     }
@@ -67,6 +85,20 @@ public class Health : MonoBehaviour
     {
         currentHealth = Mathf.Clamp(currentHealth + _value, 0, startingHealth);
     }
+
+   // public void Respawn()
+    //{
+    //    dead = false;
+    //    Healing(startingHealth);
+    //    anm.ResetTrigger("die");
+    //    anm.Play("Idle");
+    //    StartCoroutine(Invunerability());
+
+    //    foreach (Behaviour behave in components)
+    //    {
+    //        behave.enabled = true;
+    //    }
+    //}
 
     private IEnumerator Invunerability()
     {
@@ -80,6 +112,10 @@ public class Health : MonoBehaviour
             yield return new WaitForSeconds(iFramesDuration / (numberOfFlashes * 2));
         }
         Physics2D.IgnoreLayerCollision(8, 9, false);
+    }
 
+    private void Deactivate()
+    {
+        gameObject.SetActive(false);
     }
 }

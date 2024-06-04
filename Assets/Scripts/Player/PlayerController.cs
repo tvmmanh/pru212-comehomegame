@@ -20,6 +20,9 @@ namespace ComeHomeGame
 
         private Chest currentChest;
 
+        [Header("SFX")]
+        [SerializeField] private AudioClip jumpSound;
+
         private void Awake()
         {
             body = GetComponent<Rigidbody2D>();
@@ -65,6 +68,11 @@ namespace ComeHomeGame
                 if (Input.GetKey(KeyCode.Space))
                 {
                     Jump();
+
+                    if (Input.GetKeyDown(KeyCode.Space) && isGrounded())
+                    {
+                        SoundManage.instance.PlaySound(jumpSound);
+                    }
                 }
             } 
             else

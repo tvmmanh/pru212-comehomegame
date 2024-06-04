@@ -9,11 +9,11 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 21707ec2a27969d40938e9436791c3f5
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 31bca9ac503f5ea48a7797696932cf71
-  - enabled: 1
     path: Assets/Scenes/Forest.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/SampleScene.unity
+    guid: 31bca9ac503f5ea48a7797696932cf71
   - enabled: 1
     path: Assets/Scenes/Scence_Tuan_Midleways.unity
     guid: 726d55372a9f44946b1ca2181e2accbd

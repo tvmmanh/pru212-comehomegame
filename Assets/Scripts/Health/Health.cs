@@ -41,7 +41,23 @@ public class Health : MonoBehaviour
             if (!dead)
             {
                 anm.SetTrigger("dead");
-                GetComponent<PlayerController>().enabled = false;
+                //Player
+                if(GetComponent<PlayerController>() != null)
+                {
+                    GetComponent<PlayerController>().enabled = false;
+                }
+
+                //Enemy
+                if(GetComponentInParent<EnemyPatrol>() != null)
+                {
+                    GetComponentInParent<EnemyPatrol>().enabled = false;
+                }
+
+                if(GetComponent<DemonEnemy>() != null)
+                {
+                    GetComponent<DemonEnemy>().enabled = false;
+                }
+
                 dead = true;
             }
         }

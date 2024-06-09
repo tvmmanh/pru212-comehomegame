@@ -91,6 +91,8 @@ namespace ComeHomeGame
                     currentChest.Open();
                 }
             }
+
+            
         }
 
         private void Jump()

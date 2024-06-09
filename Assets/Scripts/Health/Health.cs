@@ -81,12 +81,38 @@ public class Health : MonoBehaviour
         }
     }
 
+    public void Die()
+    {
+        StartCoroutine(DieCoroutine());
+    }
+
+    private IEnumerator DieCoroutine()
+    {
+        Debug.Log("die nef");
+
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        if(rb != null)
+        {
+            rb.velocity = Vector3.zero;
+            rb.isKinematic = true;
+        }
+
+        anm.SetTrigger("die");
+        dead = true;
+
+        SoundManage.instance.PlaySound(deathSound);
+
+        yield return new WaitForSeconds(deathSound.length);
+
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+    }
+
     public void Healing(float _value)
     {
         currentHealth = Mathf.Clamp(currentHealth + _value, 0, startingHealth);
     }
 
-   // public void Respawn()
+    //public void Respawn()
     //{
     //    dead = false;
     //    Healing(startingHealth);

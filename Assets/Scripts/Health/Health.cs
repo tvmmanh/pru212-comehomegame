@@ -20,6 +20,13 @@ public class Health : MonoBehaviour
     [SerializeField] private int numberOfFlashes;
     private SpriteRenderer spriteRender;
 
+    [Header("Components")]
+    [SerializeField] private Behaviour[] components;
+    
+    [Header("Death Sound")]
+    [SerializeField] private AudioClip deathSound;
+    [SerializeField] private AudioClip hurtSound;
+
     private void Awake()
     {
         currentHealth = startingHealth;
@@ -35,22 +42,89 @@ public class Health : MonoBehaviour
         {
             anm.SetTrigger("hurt");
             StartCoroutine(Invunerability());
+            SoundManage.instance.PlaySound(hurtSound);
         }
         else
         {
             if (!dead)
             {
-                anm.SetTrigger("dead");
-                GetComponent<PlayerController>().enabled = false;
+                anm.SetTrigger("die");
+
+                /*  
+                //Player
+                if(GetComponent<PlayerController>() != null)
+                {
+                    GetComponent<PlayerController>().enabled = false;
+                }
+
+                //Enemy
+                if(GetComponentInParent<EnemyPatrol>() != null)
+                {
+                    GetComponentInParent<EnemyPatrol>().enabled = false;
+                }
+
+                if(GetComponent<DemonEnemy>() != null)
+                {
+                    GetComponent<DemonEnemy>().enabled = false;
+                } 
+                */
+
+                foreach (Behaviour behave in components)
+                {
+                    behave.enabled = false;
+                }
+
                 dead = true;
+
+                SoundManage.instance.PlaySound(deathSound);
             }
         }
+    }
+
+    public void Die()
+    {
+        StartCoroutine(DieCoroutine());
+    }
+
+    private IEnumerator DieCoroutine()
+    {
+        Debug.Log("die nef");
+
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        if(rb != null)
+        {
+            rb.velocity = Vector3.zero;
+            rb.isKinematic = true;
+        }
+
+        anm.SetTrigger("die");
+        dead = true;
+
+        SoundManage.instance.PlaySound(deathSound);
+
+        yield return new WaitForSeconds(deathSound.length);
+
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
     }
 
     public void Healing(float _value)
     {
         currentHealth = Mathf.Clamp(currentHealth + _value, 0, startingHealth);
     }
+
+    //public void Respawn()
+    //{
+    //    dead = false;
+    //    Healing(startingHealth);
+    //    anm.ResetTrigger("die");
+    //    anm.Play("Idle");
+    //    StartCoroutine(Invunerability());
+
+    //    foreach (Behaviour behave in components)
+    //    {
+    //        behave.enabled = true;
+    //    }
+    //}
 
     private IEnumerator Invunerability()
     {
@@ -64,6 +138,10 @@ public class Health : MonoBehaviour
             yield return new WaitForSeconds(iFramesDuration / (numberOfFlashes * 2));
         }
         Physics2D.IgnoreLayerCollision(8, 9, false);
+    }
 
+    private void Deactivate()
+    {
+        gameObject.SetActive(false);
     }
 }

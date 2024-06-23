@@ -10,6 +10,7 @@ TagManager:
   - Wall
   - Enemy
   - CheckPoint
+  - question table
   layers:
   - Default
   - TransparentFX

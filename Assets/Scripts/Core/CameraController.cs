@@ -11,7 +11,7 @@ public class CameraController : MonoBehaviour
     private float lookAhead;
     void Start()
     {
-        
+        DontDestroyOnLoad(gameObject);
     }
 
     // Update is called once per frame

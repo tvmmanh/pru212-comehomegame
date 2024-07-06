@@ -26,23 +26,36 @@ namespace ComeHomeGame
         private void Awake()
         {
             DataManager dataManager = DataManager.Instance;
-            if (dataManager != null)
+            if (dataManager != null )
             {
-                var (currentHealth, scalePlayer, jump, spd, dame, maxHealth) = dataManager.GetPlayerData();
-
-                if (scalePlayer != Vector3.zero)
+                if (dataManager.Type == "Normal")
                 {
-                    this.transform.localScale = scalePlayer;
+                    var (currentHealth, scalePlayer, jump, spd, dame, maxHealth) = dataManager.GetPlayerData();
+
+                    if (scalePlayer != Vector3.zero)
+                    {
+                        this.transform.localScale = scalePlayer;
+                    }
+
+                    if (jump > 0)
+                    {
+                        this.jumpPower = jump;
+                    }
+
+                    if (spd > 0)
+                    {
+                        this.speed = spd;
+                    }
                 }
-
-                if (jump > 0)
-                {
-                    this.jumpPower = jump;
-                }
-
-                if (spd > 0)
-                {
-                    this.speed = spd;
+                else if(dataManager.Type == "Continue")
+                {   
+                    
+                    User user = dataManager.user;
+                    transform.position = new Vector3(user.xPosition,user.yPosition,0);
+                    this.transform.localScale = new Vector3((float)user.currentScale, (float)user.currentScale, (float)user.currentScale);
+                    this.jumpPower = (float)user.currentJump; 
+                    this.speed = (float)user.currentSpeed;
+                    
                 }
             }
 
@@ -186,6 +199,9 @@ namespace ComeHomeGame
         public void SetPosition(float x, float y, float z)
         {
             transform.position = new Vector3(x, y, z);
+        }
+        public Vector3 GetPosition() { 
+            return transform.position;
         }
     }
 }

@@ -14,6 +14,7 @@ namespace Cainos.PixelArtPlatformer_VillageProps
     {
         private UnityWebRequest webRequest;
         public GameObject questionPanel;
+        public GameObject[] items;
         [FoldoutGroup("Reference")]
         public Animator animator;
 
@@ -43,7 +44,7 @@ namespace Cainos.PixelArtPlatformer_VillageProps
                 var question = await FetchAsync("https://opentdb.com/api.php?amount=1");
    
                 question[0].incorrect_answers.Add(question[0].correct_answer);
-                questionPanel.GetComponent<QuestionManager>().DisplayQuestion(question[0].question, question[0].incorrect_answers, question[0].correct_answer);
+                questionPanel.GetComponent<QuestionManager>().DisplayQuestion(question[0].question, question[0].incorrect_answers, question[0].correct_answer, items);
 
             }
         }

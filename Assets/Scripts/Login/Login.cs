@@ -35,13 +35,16 @@ public class Login : MonoBehaviour
             return;
         }
 
-        string url = $"http://localhost/{emailText}/{passwordText}";
+        string url = $"https://api-cominghome.outfit4rent.online/users/{emailText}/{passwordText}";
         var user = await FetchAsync(url);
 
         if (user != null && user.email == emailText && user.password == passwordText)
-        {
-            notifyText.text = "Login successful!";
+        {   
 
+            notifyText.text = "Login successful!";
+            DataManager dataManager = DataManager.Instance;
+            dataManager.SetUser(user);
+            Debug.Log(user.indexScene);
             SceneManager.LoadSceneAsync(1);
         }
         else
@@ -100,14 +103,18 @@ public class User
     public string email;
     public string password;
     public bool isAnyCompleted;
-    public int totalScore;
+    public double totalScore;
     public int numberCheckpoint;
-    public int currentScore;
-    public int currentTime;
-    public float currentScale;
-    public int currentJump;
-    public int currentDame;
-    public int currentHealth;
-    public object playings; 
+    public float xPosition;
+    public int indexScene;
+    public float yPosition;
+    public double currentScore;
+    public double currentTime;
+    public double currentScale;
+    public double currentSpeed;
+    public double currentJump;
+    public double currentDame;
+    public double currentHealth;
+    public object playings;
 }
 

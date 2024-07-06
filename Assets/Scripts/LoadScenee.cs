@@ -28,7 +28,7 @@ public class LoadScenee : MonoBehaviour
             var speed = playerController.GetSpeed();
             var jump = playerController.GetJump();
             var scale = playerController.GetScaleCharacter();
-
+            dataManager.Type = "Normal";
             dataManager.SetPlayerData(currentHealth, scale, jump, speed, 1, maximumHealth);
             SceneManager.LoadScene(sceneIndex);
 

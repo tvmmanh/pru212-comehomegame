@@ -34,9 +34,17 @@ public class Health : MonoBehaviour
         DataManager dataManager = DataManager.Instance;
         if (dataManager != null)
         {
-            var (currentHealth, scalePlayer, jump, spd, dame, maxHealth) = dataManager.GetPlayerData();
+            if (dataManager.Type == "Normal")
+            {
+                var (currentHealth, scalePlayer, jump, spd, dame, maxHealth) = dataManager.GetPlayerData();
 
-           this.currentHealth = currentHealth;
+                if (currentHealth != 0) this.currentHealth = currentHealth;
+                else this.currentHealth = startingHealth;
+            } else if (dataManager.Type == "Continue")
+            {
+                User user = dataManager.user;
+                this.currentHealth = (float)user.currentHealth;
+            }
         }
 
 

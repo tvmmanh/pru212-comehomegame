@@ -18,7 +18,8 @@ public class DataManager : MonoBehaviour
             return _instance;
         }
     }
-
+    public string Type { get; set; } = "Normal";
+    public User user { get; set; }
     public float currentHealth;
     public Vector3 scalePlayer;
     public float Jump;
@@ -54,5 +55,9 @@ public class DataManager : MonoBehaviour
     public (float, Vector3, float, float, float, float) GetPlayerData()
     {
         return (currentHealth, scalePlayer, Jump, Speed, Dame, maximumHealth);
+    }
+    public void SetUser(User user)
+    {
+        this.user= user;
     }
 }

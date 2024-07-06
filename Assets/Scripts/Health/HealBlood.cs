@@ -14,4 +14,8 @@ public class HealBlood : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
+    public float HealthValue()
+    {
+        return healValue;
+    }
 }

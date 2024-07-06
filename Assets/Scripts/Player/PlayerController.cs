@@ -20,7 +20,7 @@ namespace ComeHomeGame
         private float chosenScale = 6.0f;
 
         private Chest currentChest;
-
+        public Canvas Win;
         [Header("SFX")]
         [SerializeField] private AudioClip jumpSound;
 
@@ -187,6 +187,11 @@ namespace ComeHomeGame
             if (collision.gameObject.CompareTag("Chest"))
             {
                 currentChest = collision.gameObject.GetComponent<Chest>();
+            }
+            if(collision.tag == "Win")
+            {
+                Win.gameObject.SetActive(true);
+                Time.timeScale = 0;
             }
         }
 

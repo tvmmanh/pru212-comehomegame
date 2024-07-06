@@ -17,6 +17,7 @@ namespace ComeHomeGame
         private BoxCollider2D boxCollider;
         private float wallJumpCooldown;
         private float horizontalInput;
+        private float chosenScale = 6.0f;
 
         private Chest currentChest;
 
@@ -63,6 +64,12 @@ namespace ComeHomeGame
             anm = GetComponent<Animator>();
             boxCollider = GetComponent<BoxCollider2D>();
 
+        }
+
+        public void SetCharacterSize(float scale)
+        {
+            chosenScale = scale;
+            UpdateCharacterScale(horizontalInput);
         }
 
         private void Update()
@@ -126,8 +133,20 @@ namespace ComeHomeGame
                     currentChest.Open();
                 }
             }
+        }
 
-
+        private void UpdateCharacterScale(float horizontalInput)
+        {
+            //Flip character
+            if (horizontalInput > 0.01f)
+            {
+                // transform.localScale = Vector3.one;
+                transform.localScale = new Vector3(chosenScale, chosenScale, chosenScale);
+            }
+            else if (horizontalInput < -0.01f)
+            {
+                transform.localScale = new Vector3(-chosenScale, chosenScale, chosenScale);
+            }
         }
 
         private void Jump()
@@ -142,7 +161,7 @@ namespace ComeHomeGame
                 if (horizontalInput == 0)
                 {
                     body.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 10, 0);
-                    transform.localScale = new Vector3(-Mathf.Sign(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+                    transform.localScale = new Vector3(-Mathf.Sign(transform.localScale.x) * chosenScale, chosenScale, chosenScale);
                 }
                 else
                 {
@@ -154,12 +173,12 @@ namespace ComeHomeGame
 
         private bool isGrounded()
         {
-            RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.1f, groundLayer);
+            RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size * chosenScale, 0, Vector2.down, 0.1f * chosenScale, groundLayer);
             return raycastHit.collider != null;
         }
         private bool onWall()
         {
-            RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, new Vector2(transform.localScale.x, 0), 0.1f, wallLayer);
+            RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size * chosenScale, 0, new Vector2(transform.localScale.x, 0), 0.1f * chosenScale, wallLayer);
             return raycastHit.collider != null;
         }
 

@@ -9,6 +9,7 @@ public class LoadingManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
+            DontDestroyOnLoad(gameObject);
             SceneManager.LoadScene(3);
         }
     }

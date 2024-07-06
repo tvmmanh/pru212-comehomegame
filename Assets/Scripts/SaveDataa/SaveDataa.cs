@@ -47,7 +47,7 @@ public class SaveDataa : MonoBehaviour
             Debug.LogError("Health component is not found.");
             return;
         }
-
+        Score scoteManager = player.GetComponent<Score>();  
         Vector3 currentPlayerPosition = playerController.GetPosition();
         user.yPosition = currentPlayerPosition.y;
         user.xPosition = currentPlayerPosition.x;
@@ -57,6 +57,7 @@ public class SaveDataa : MonoBehaviour
         user.indexScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
         user.currentSpeed = playerController.GetSpeed();
         user.currentDame = 1;
+        user.currentScore = scoteManager.GetScore();
 
         StartCoroutine(SaveUserData(user));
     }

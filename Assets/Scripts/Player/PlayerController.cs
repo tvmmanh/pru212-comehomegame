@@ -1,4 +1,4 @@
-using Cainos.PixelArtPlatformer_VillageProps;
+﻿using Cainos.PixelArtPlatformer_VillageProps;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
@@ -17,6 +17,7 @@ namespace ComeHomeGame
         private BoxCollider2D boxCollider;
         private float wallJumpCooldown;
         private float horizontalInput;
+        private float chosenScale = 6.0f;
 
         private Chest currentChest;
 
@@ -25,9 +26,50 @@ namespace ComeHomeGame
 
         private void Awake()
         {
+            DataManager dataManager = DataManager.Instance;
+            if (dataManager != null )
+            {
+                if (dataManager.Type == "Normal")
+                {
+                    var (currentHealth, scalePlayer, jump, spd, dame, maxHealth) = dataManager.GetPlayerData();
+
+                    if (scalePlayer != Vector3.zero)
+                    {
+                        this.transform.localScale = scalePlayer;
+                    }
+
+                    if (jump > 0)
+                    {
+                        this.jumpPower = jump;
+                    }
+
+                    if (spd > 0)
+                    {
+                        this.speed = spd;
+                    }
+                }
+                else if(dataManager.Type == "Continue")
+                {   
+                    
+                    User user = dataManager.user;
+                    transform.position = new Vector3(user.xPosition,user.yPosition,0);
+                    this.transform.localScale = new Vector3((float)user.currentScale, (float)user.currentScale, (float)user.currentScale);
+                    this.jumpPower = (float)user.currentJump; 
+                    this.speed = (float)user.currentSpeed;
+                    
+                }
+            }
+
             body = GetComponent<Rigidbody2D>();
             anm = GetComponent<Animator>();
             boxCollider = GetComponent<BoxCollider2D>();
+
+        }
+
+        public void SetCharacterSize(float scale)
+        {
+            chosenScale = scale;
+            UpdateCharacterScale(horizontalInput);
         }
 
         private void Update()
@@ -37,7 +79,7 @@ namespace ComeHomeGame
             //Flip character
             if (horizontalInput > 0.01f)
             {
-               // transform.localScale = Vector3.one;
+                // transform.localScale = Vector3.one;
                 transform.localScale = new Vector3(6, 6, 6);
             }
             else if (horizontalInput < -0.01f)
@@ -51,11 +93,11 @@ namespace ComeHomeGame
             anm.SetBool("land", !Input.GetKey(KeyCode.DownArrow));
 
             //Wall Jump Logic
-            if(wallJumpCooldown > 0.2f)
+            if (wallJumpCooldown > 0.2f)
             {
                 body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
 
-                if(onWall() && !isGrounded())
+                if (onWall() && !isGrounded())
                 {
                     body.gravityScale = 0;
                     body.velocity = Vector2.zero;
@@ -74,15 +116,15 @@ namespace ComeHomeGame
                         SoundManage.instance.PlaySound(jumpSound);
                     }
                 }
-            } 
+            }
             else
             {
                 wallJumpCooldown += Time.deltaTime;
             }
 
-            if(Input.GetKey(KeyCode.E) && currentChest != null)
+            if (Input.GetKey(KeyCode.E) && currentChest != null)
             {
-                if(currentChest.IsOpened)
+                if (currentChest.IsOpened)
                 {
                     currentChest.Close();
                 }
@@ -91,8 +133,20 @@ namespace ComeHomeGame
                     currentChest.Open();
                 }
             }
+        }
 
-            
+        private void UpdateCharacterScale(float horizontalInput)
+        {
+            //Flip character
+            if (horizontalInput > 0.01f)
+            {
+                // transform.localScale = Vector3.one;
+                transform.localScale = new Vector3(chosenScale, chosenScale, chosenScale);
+            }
+            else if (horizontalInput < -0.01f)
+            {
+                transform.localScale = new Vector3(-chosenScale, chosenScale, chosenScale);
+            }
         }
 
         private void Jump()
@@ -102,12 +156,12 @@ namespace ComeHomeGame
                 body.velocity = new Vector2(body.velocity.x, jumpPower);
                 anm.SetTrigger("Jump");
             }
-            else if(onWall() && !isGrounded())
+            else if (onWall() && !isGrounded())
             {
-                if(horizontalInput == 0)
+                if (horizontalInput == 0)
                 {
                     body.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 10, 0);
-                    transform.localScale = new Vector3(-Mathf.Sign(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+                    transform.localScale = new Vector3(-Mathf.Sign(transform.localScale.x) * chosenScale, chosenScale, chosenScale);
                 }
                 else
                 {
@@ -119,12 +173,12 @@ namespace ComeHomeGame
 
         private bool isGrounded()
         {
-            RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.1f, groundLayer);
+            RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size * chosenScale, 0, Vector2.down, 0.1f * chosenScale, groundLayer);
             return raycastHit.collider != null;
         }
         private bool onWall()
         {
-            RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, new Vector2(transform.localScale.x, 0), 0.1f, wallLayer);
+            RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size * chosenScale, 0, new Vector2(transform.localScale.x, 0), 0.1f * chosenScale, wallLayer);
             return raycastHit.collider != null;
         }
 
@@ -142,11 +196,31 @@ namespace ComeHomeGame
             {
                 currentChest = null;
             }
+
         }
 
         public bool canAttack()
         {
             return horizontalInput == 0 && isGrounded() && !onWall();
+        }
+        public float GetSpeed()
+        {
+            return speed;
+        }
+        public float GetJump()
+        {
+            return jumpPower;
+        }
+        public Vector3 GetScaleCharacter()
+        {
+            return transform.localScale;
+        }
+        public void SetPosition(float x, float y, float z)
+        {
+            transform.position = new Vector3(x, y, z);
+        }
+        public Vector3 GetPosition() { 
+            return transform.position;
         }
     }
 }

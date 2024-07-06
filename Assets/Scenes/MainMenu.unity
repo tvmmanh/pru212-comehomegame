@@ -304,7 +304,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 233670226}
   m_LocalRotation: {x: -0.031934027, y: -0, z: -0, w: 0.99949}
-  m_LocalPosition: {x: 0, y: 0, z: -9.000274}
+  m_LocalPosition: {x: 0, y: 0, z: -8.999965}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -315,7 +315,7 @@ RectTransform:
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: -551.00024, y: 89.00006}
   m_SizeDelta: {x: 160, y: 30}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0.49999955}
 --- !u!114 &233670228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1497,9 +1497,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 759077109}
         m_TargetAssemblyTypeName: Play, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: Load
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

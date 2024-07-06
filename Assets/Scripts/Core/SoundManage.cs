@@ -10,7 +10,7 @@ public class SoundManage : MonoBehaviour
     private AudioSource source;
 
     private void Awake()
-    {
+    {   
         source = GetComponent<AudioSource>();
 
         //keep this object even go to new scene

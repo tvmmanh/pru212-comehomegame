@@ -45,7 +45,7 @@ namespace ComeHomeGame
                     this.speed = spd;
                 }
             }
-            DontDestroyOnLoad(gameObject);
+
             body = GetComponent<Rigidbody2D>();
             anm = GetComponent<Animator>();
             boxCollider = GetComponent<BoxCollider2D>();

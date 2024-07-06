@@ -31,9 +31,14 @@ public class Health : MonoBehaviour
     private void Awake()
     {
 
+        DataManager dataManager = DataManager.Instance;
+        if (dataManager != null)
+        {
+            var (currentHealth, scalePlayer, jump, spd, dame, maxHealth) = dataManager.GetPlayerData();
 
+           this.currentHealth = currentHealth;
+        }
 
-        currentHealth = startingHealth;
 
 
         anm = GetComponent<Animator>();

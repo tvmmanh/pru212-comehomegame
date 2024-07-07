@@ -17,10 +17,10 @@ public class Score : MonoBehaviour
             if (dataManager.Type=="Continue")
             {
                 score = user.currentScore;
-                            }
+            }
             else if(dataManager.Type=="Normal")
             {
-                score = 0;
+                score = dataManager.GetScore();
                 
             }
             TextMeshPro.text = this.score.ToString();

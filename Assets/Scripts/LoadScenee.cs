@@ -28,8 +28,10 @@ public class LoadScenee : MonoBehaviour
             var speed = playerController.GetSpeed();
             var jump = playerController.GetJump();
             var scale = playerController.GetScaleCharacter();
+            var score = collision.GetComponent<Score>().GetScore();
             dataManager.Type = "Normal";
             dataManager.SetPlayerData(currentHealth, scale, jump, speed, 1, maximumHealth);
+            dataManager.SetScore((float)score);
             SceneManager.LoadScene(sceneIndex);
 
             var player = collision.gameObject.GetComponent<PlayerController>();

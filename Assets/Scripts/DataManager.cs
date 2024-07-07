@@ -26,6 +26,7 @@ public class DataManager : MonoBehaviour
     public float Speed;
     public float Dame;
     public float maximumHealth;
+    public float Score;
 
     void Awake()
     {
@@ -59,5 +60,13 @@ public class DataManager : MonoBehaviour
     public void SetUser(User user)
     {
         this.user= user;
+    }
+    public void SetScore(float score)
+    {
+        this.Score = score;
+    }
+    public float GetScore()
+    {
+        return this.Score;
     }
 }

@@ -6,6 +6,7 @@ using UnityEngine;
 public class ScoreItem : MonoBehaviour
 {
     public double price;
+    public AudioClip audioClip;
     void Start()
     {
         
@@ -20,8 +21,10 @@ public class ScoreItem : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            SoundManage.instance.PlaySound(audioClip);
             var scoreManger = collision.GetComponent<Score>();
             scoreManger.SetScore(price);
+            gameObject.SetActive(false);
         }
     }
 }

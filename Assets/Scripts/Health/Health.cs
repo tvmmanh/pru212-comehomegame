@@ -1,5 +1,6 @@
 using ComeHomeGame;
 using System.Collections;
+using System.Security.Cryptography;
 using UnityEditor;
 using UnityEngine;
 
@@ -65,7 +66,7 @@ public class Health : MonoBehaviour
         {
             anm.SetTrigger("hurt");
             StartCoroutine(Invunerability());
-            SoundManage.instance.PlaySound(hurtSound);
+            if(hurtSound!=null) SoundManage.instance.PlaySound(hurtSound);
         }
         else
         {
@@ -79,7 +80,7 @@ public class Health : MonoBehaviour
                 }
 
                 dead = true;
-                SoundManage.instance.PlaySound(deathSound);
+               if(deathSound!=null) SoundManage.instance.PlaySound(deathSound);
                 StartCoroutine(DieCoroutine());
             }
         }
@@ -103,7 +104,7 @@ public class Health : MonoBehaviour
         anm.SetTrigger("die");
         dead = true;
 
-        SoundManage.instance.PlaySound(deathSound);
+        if(deathSound!=null) SoundManage.instance.PlaySound(deathSound);
 
         yield return new WaitForSeconds(deathSound.length);
 

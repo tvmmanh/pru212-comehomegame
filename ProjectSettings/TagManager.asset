@@ -13,6 +13,7 @@ TagManager:
   - question table
   - Win
   - WINGAME
+  - EnemyTrap
   layers:
   - Default
   - TransparentFX

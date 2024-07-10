@@ -15,11 +15,13 @@ public class Login : MonoBehaviour
     public Button loginButton;
     public TMP_InputField email;
     public TMP_InputField password;
+    public Button regBtn;
 
     private void Start()
     {
 
         loginButton.onClick.AddListener(() => LoginEmail(email.text, password.text));
+        regBtn.onClick.AddListener(() => SceneManager.LoadScene("Register"));
         notifyText.enabled = false;
     }
 
@@ -62,7 +64,7 @@ public class Login : MonoBehaviour
             return;
         }
 
-        string url = $"https://api-cominghome.outfit4rent.online/{emailText}/{passwordText}";
+        string url = $"https://api-cominghome.outfit4rent.online/users/{emailText}/{passwordText}";
         var user = await FetchAsync(url);
 
         if (user != null && user.email == emailText && user.password == passwordText)

@@ -18,19 +18,46 @@ public class Login : MonoBehaviour
 
     private void Start()
     {
+
         loginButton.onClick.AddListener(() => LoginEmail(email.text, password.text));
+        notifyText.enabled = false;
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            LoginEmail(email.text, password.text);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            if (email.isFocused)
+            {
+                password.Select();
+            }
+            else if (password.isFocused)
+            {
+                email.Select();
+            }
+        }
+    }
+
 
     public async void LoginEmail(string emailText, string passwordText)
     {
         if (string.IsNullOrEmpty(emailText) || string.IsNullOrEmpty(passwordText))
         {
+            notifyText.enabled = true;
+
             notifyText.text = "Email or password cannot be empty.";
             return;
         }
 
         if (!IsValidEmail(emailText) || passwordText.Length < 4)
         {
+            notifyText.enabled = true;
+
             notifyText.text = "Invalid email or password.";
             return;
         }
@@ -40,12 +67,16 @@ public class Login : MonoBehaviour
 
         if (user != null && user.email == emailText && user.password == passwordText)
         {
+            notifyText.enabled = true;
+
             notifyText.text = "Login successful!";
 
             SceneManager.LoadSceneAsync(1);
         }
         else
         {
+            notifyText.enabled = true;
+
             notifyText.text = "Login failed. Incorrect email or password.";
         }
     }
@@ -110,4 +141,3 @@ public class User
     public int currentHealth;
     public object playings; 
 }
-

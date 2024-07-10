@@ -45,6 +45,7 @@ public class Health : MonoBehaviour
                 User user = dataManager.user;
                 this.currentHealth = (float)user.currentHealth;
             }
+            if(gameObject.tag == "Enemy") this.currentHealth=startingHealth;
         }
 
 

@@ -11,6 +11,8 @@ TagManager:
   - Enemy
   - CheckPoint
   - question table
+  - Win
+  - WINGAME
   layers:
   - Default
   - TransparentFX

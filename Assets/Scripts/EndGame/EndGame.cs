@@ -7,20 +7,44 @@ public class EndGame : MonoBehaviour
 {
     public GameObject player;
     public GameObject tableWin;
-    public double yourScore { get; private set; }
+    public float yourScore { get; private set; }
 
-    public void SaveDataOnButtonPress()
+    private DataManager dataManager;
+    private PlayerController playerController;
+    private Health healthController;
+    private Score scoreManager;
+
+    private const string apiUrl = "https://api-cominghome.outfit4rent.online";
+
+    private void Awake()
     {
         if (player == null)
         {
             Debug.LogError("Player GameObject is not assigned.");
-            return;
+        }
+        else
+        {
+            playerController = player.GetComponent<PlayerController>();
+            healthController = player.GetComponent<Health>();
+            scoreManager = player.GetComponent<Score>();
+
+            if (playerController == null) Debug.LogError("PlayerController component is not found.");
+            if (healthController == null) Debug.LogError("Health component is not found.");
+            if (scoreManager == null) Debug.LogError("Score component is not found.");
         }
 
-        DataManager dataManager = DataManager.Instance;
+        dataManager = DataManager.Instance;
         if (dataManager == null)
         {
             Debug.LogError("DataManager instance is not found.");
+        }
+    }
+
+    public void SaveDataOnButtonPress()
+    {
+        if (player == null || playerController == null || healthController == null || scoreManager == null)
+        {
+            Debug.LogError("Required components are not assigned.");
             return;
         }
 
@@ -31,26 +55,16 @@ public class EndGame : MonoBehaviour
             return;
         }
 
-        PlayerController playerController = player.GetComponent<PlayerController>();
-        if (playerController == null)
+        var playing = new Playing()
         {
-            Debug.LogError("PlayerController component is not found.");
-            return;
-        }
+            score = (float)scoreManager.GetScore(),
+            userId = user.id,
+            time = 0f // Ensure this is set correctly
+        };
 
-        Health healthController = player.GetComponent<Health>();
-        if (healthController == null)
-        {
-            Debug.LogError("Health component is not found.");
-            return;
-        }
+        Debug.Log("Creating Playing object with Score: " + playing.score + ", User ID: " + playing.userId + ", Time: " + playing.time);
 
-        Score scoreManager = player.GetComponent<Score>();
-        if (scoreManager == null)
-        {
-            Debug.LogError("Score component is not found.");
-            return;
-        }
+        StartCoroutine(SavePlaying(playing));
 
         user.yPosition = 0;
         user.xPosition = 0;
@@ -61,15 +75,8 @@ public class EndGame : MonoBehaviour
         user.currentSpeed = 0;
         user.currentDame = 1;
         user.totalScore = Mathf.Max((float)user.totalScore, (float)scoreManager.GetScore());
-        StartCoroutine(SaveUserData(user));
 
-        var playing = new Playing()
-        {
-            score = scoreManager.GetScore(),
-            userId = user.id,
-            time = 0
-        };
-        StartCoroutine(SavePlaying(playing));
+        StartCoroutine(SaveUserData(user));
     }
 
     IEnumerator SaveUserData(User data)
@@ -77,7 +84,7 @@ public class EndGame : MonoBehaviour
         string jsonData = JsonUtility.ToJson(data);
         byte[] postData = System.Text.Encoding.UTF8.GetBytes(jsonData);
 
-        UnityWebRequest webRequest = new UnityWebRequest("https://api-cominghome.outfit4rent.online/users", "PUT")
+        UnityWebRequest webRequest = new UnityWebRequest($"{apiUrl}/users", "PUT")
         {
             uploadHandler = new UploadHandlerRaw(postData),
             downloadHandler = new DownloadHandlerBuffer()
@@ -98,10 +105,19 @@ public class EndGame : MonoBehaviour
 
     IEnumerator SavePlaying(Playing data)
     {
+        // Log the properties of the Playing object
+        Debug.Log("Playing object properties:");
+        Debug.Log("Score: " + data.score);
+        Debug.Log("Time: " + data.time);
+        Debug.Log("User ID: " + data.userId);
+
         string jsonData = JsonUtility.ToJson(data);
+
+        Debug.Log("Generated JSON: " + jsonData);
+
         byte[] postData = System.Text.Encoding.UTF8.GetBytes(jsonData);
 
-        UnityWebRequest webRequest = new UnityWebRequest("https://api-cominghome.outfit4rent.online/playings", "POST")
+        UnityWebRequest webRequest = new UnityWebRequest($"{apiUrl}/playings", "POST")
         {
             uploadHandler = new UploadHandlerRaw(postData),
             downloadHandler = new DownloadHandlerBuffer()
@@ -117,6 +133,8 @@ public class EndGame : MonoBehaviour
         else
         {
             Debug.LogError("Error saving playing data: " + webRequest.error);
+            Debug.LogError("Response Code: " + webRequest.responseCode);
+            Debug.LogError("Response: " + webRequest.downloadHandler.text);
         }
     }
 
@@ -124,18 +142,17 @@ public class EndGame : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            Debug.Log("Collision with Player detected.");
             Time.timeScale = 0;
-            Score scoreManager = player.GetComponent<Score>();
             SaveDataOnButtonPress();
-            tableWin.GetComponent<TableWinGame>().Display(DataManager.Instance.user.email, 5, scoreManager.GetScore());
+            tableWin.GetComponent<TableWinGame>().Display(dataManager.user.email, 5, scoreManager.GetScore());
         }
     }
 }
-
+[System.Serializable]
 public class Playing
 {
-    public int id { get; set; }
-    public double score { get; set; }
-    public double time { get; set; }
-    public int userId { get; set; }
+    public float score;
+    public float time;
+    public int userId;
 }

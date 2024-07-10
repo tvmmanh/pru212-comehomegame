@@ -188,11 +188,7 @@ namespace ComeHomeGame
             {
                 currentChest = collision.gameObject.GetComponent<Chest>();
             }
-            if(collision.tag == "Win")
-            {
-                Win.gameObject.SetActive(true);
-                Time.timeScale = 0;
-            }
+           
         }
 
         private void OnTriggerExit2D(Collider2D collision)

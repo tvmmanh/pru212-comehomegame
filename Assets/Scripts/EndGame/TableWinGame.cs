@@ -13,24 +13,17 @@ public class TableWinGame : MonoBehaviour
     public TMP_Text YourScore;
     public TMP_Text YourRank;
 
-    void Start()
-    {
-    }
-
-    void Update()
-    {
-    }
-
     public void Display(string email, int rank, double score)
     {
         gameObject.SetActive(true);
         StartCoroutine(CallAPI(email, score, rank));
+        
     }
 
     IEnumerator CallAPI(string email, double score, int rank)
     {
-        string url = $"https://api-cominghome.outfit4rent.online//users/rank-tops/{email}/{score}/{rank}";
-        UnityWebRequest request = UnityWebRequest.Put(url, "");
+        string url = $"https://api-cominghome.outfit4rent.online/users/rank-tops/{email}/{score}/{rank}";
+        UnityWebRequest request = UnityWebRequest.Get(url);
 
         yield return request.SendWebRequest();
 
@@ -43,7 +36,6 @@ public class TableWinGame : MonoBehaviour
             string jsonResponse = request.downloadHandler.text;
             RankModel response = JsonUtility.FromJson<RankModel>(jsonResponse);
 
-            // Update the UI with the fetched data
             UpdateUI(response);
         }
     }
@@ -62,6 +54,7 @@ public class TableWinGame : MonoBehaviour
 
         YourScore.text = response.score.ToString();
         YourRank.text = response.rank.ToString();
+        
     }
 }
 

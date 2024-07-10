@@ -39,7 +39,7 @@ public class Login : MonoBehaviour
         var user = await FetchAsync(url);
 
         if (user != null && user.email == emailText && user.password == passwordText)
-        {   
+        {
 
             notifyText.text = "Login successful!";
             DataManager dataManager = DataManager.Instance;

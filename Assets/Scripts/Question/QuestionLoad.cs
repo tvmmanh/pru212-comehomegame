@@ -10,7 +10,7 @@ public class QuestionManager : MonoBehaviour
     public TMP_Text questionText;
     public Button[] choiceButtons;
     private string correctAnswer;
-    public GameObject cardPanel;
+    private GameObject[] items;
     private void Start()
     {
         for (int i = 0; i < choiceButtons.Length; i++)
@@ -20,8 +20,9 @@ public class QuestionManager : MonoBehaviour
         }
     }
 
-    public void DisplayQuestion(string question, List<string> choices, string correctAnswer)
-    {
+    public void DisplayQuestion(string question, List<string> choices, string correctAnswer, GameObject[] items )
+    {   
+        this.items = items;
         questionText.text = question;
         this.correctAnswer = correctAnswer;
         for (int i = 0; i < choices.Count; i++)
@@ -38,14 +39,20 @@ public class QuestionManager : MonoBehaviour
         if (selectedAnswer == correctAnswer)
         {
 
-            cardPanel.GetComponent<Cards>().DisplayCard();
+            foreach (var item in items)
+            {
+                item.GetComponent<ThrowItem>().Display();
+            }
         }
         else
         {
 
-            cardPanel.GetComponent<Cards>().DisplayCard();
+            foreach (var item in items)
+            {
+                item.GetComponent<ThrowItem>().Display();
+            }
         }
-
+        Time.timeScale = 1;
         
         gameObject.SetActive(false);
     }

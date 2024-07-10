@@ -44,4 +44,5 @@ public class Enemy_SawWay : MonoBehaviour
             collision.GetComponent<Health>().TakeDamage(damage);
         }
     }
+    
 }

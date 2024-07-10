@@ -15,51 +15,22 @@ public class Login : MonoBehaviour
     public Button loginButton;
     public TMP_InputField email;
     public TMP_InputField password;
-    public Button regBtn;
 
     private void Start()
     {
-
         loginButton.onClick.AddListener(() => LoginEmail(email.text, password.text));
-        regBtn.onClick.AddListener(() => SceneManager.LoadScene("Register"));
-        notifyText.enabled = false;
     }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            LoginEmail(email.text, password.text);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            if (email.isFocused)
-            {
-                password.Select();
-            }
-            else if (password.isFocused)
-            {
-                email.Select();
-            }
-        }
-    }
-
 
     public async void LoginEmail(string emailText, string passwordText)
     {
         if (string.IsNullOrEmpty(emailText) || string.IsNullOrEmpty(passwordText))
         {
-            notifyText.enabled = true;
-
             notifyText.text = "Email or password cannot be empty.";
             return;
         }
 
         if (!IsValidEmail(emailText) || passwordText.Length < 4)
         {
-            notifyText.enabled = true;
-
             notifyText.text = "Invalid email or password.";
             return;
         }
@@ -69,16 +40,15 @@ public class Login : MonoBehaviour
 
         if (user != null && user.email == emailText && user.password == passwordText)
         {
-            notifyText.enabled = true;
 
             notifyText.text = "Login successful!";
-
+            DataManager dataManager = DataManager.Instance;
+            dataManager.SetUser(user);
+            Debug.Log(user.indexScene);
             SceneManager.LoadSceneAsync(1);
         }
         else
         {
-            notifyText.enabled = true;
-
             notifyText.text = "Login failed. Incorrect email or password.";
         }
     }
@@ -133,13 +103,18 @@ public class User
     public string email;
     public string password;
     public bool isAnyCompleted;
-    public int totalScore;
+    public double totalScore;
     public int numberCheckpoint;
-    public int currentScore;
-    public int currentTime;
-    public float currentScale;
-    public int currentJump;
-    public int currentDame;
-    public int currentHealth;
-    public object playings; 
+    public float xPosition;
+    public int indexScene;
+    public float yPosition;
+    public double currentScore;
+    public double currentTime;
+    public double currentScale;
+    public double currentSpeed;
+    public double currentJump;
+    public double currentDame;
+    public double currentHealth;
+    public object playings;
 }
+

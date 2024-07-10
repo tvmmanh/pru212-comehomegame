@@ -1,17 +1,14 @@
 using ComeHomeGame;
 using System.Collections;
+using System.Security.Cryptography;
 using UnityEditor;
 using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [Header ("Health")]
+    [Header("Health")]
     [SerializeField] public float startingHealth;
-    public float currentHealth
-    {
-        get; 
-        private set;
-    }
+    public float currentHealth { get; private set; }
     private Animator anm;
     private bool dead;
 
@@ -22,27 +19,54 @@ public class Health : MonoBehaviour
 
     [Header("Components")]
     [SerializeField] private Behaviour[] components;
-    
+
     [Header("Death Sound")]
     [SerializeField] private AudioClip deathSound;
     [SerializeField] private AudioClip hurtSound;
 
+    public Vector3 respawnPosition { get; set; }
+
+    private Rigidbody2D rb;
+    private Collider2D col;
+
     private void Awake()
     {
-        currentHealth = startingHealth;
+
+        DataManager dataManager = DataManager.Instance;
+        if (dataManager != null)
+        {
+            if (dataManager.Type == "Normal")
+            {
+                var (currentHealth, scalePlayer, jump, spd, dame, maxHealth) = dataManager.GetPlayerData();
+
+                if (currentHealth != 0) this.currentHealth = currentHealth;
+                else this.currentHealth = startingHealth;
+            } else if (dataManager.Type == "Continue")
+            {
+                User user = dataManager.user;
+                this.currentHealth = (float)user.currentHealth;
+            }
+            if(gameObject.tag == "Enemy") this.currentHealth=startingHealth;
+        }
+
+
+
         anm = GetComponent<Animator>();
         spriteRender = GetComponent<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>();
+        col = GetComponent<Collider2D>();
+        respawnPosition = transform.position; // Initial spawn position
     }
 
     public void TakeDamage(float _damage)
     {
         currentHealth = Mathf.Clamp(currentHealth - _damage, 0, startingHealth);
 
-        if(currentHealth > 0)
+        if (currentHealth > 0)
         {
             anm.SetTrigger("hurt");
             StartCoroutine(Invunerability());
-            SoundManage.instance.PlaySound(hurtSound);
+            if(hurtSound!=null) SoundManage.instance.PlaySound(hurtSound);
         }
         else
         {
@@ -50,33 +74,14 @@ public class Health : MonoBehaviour
             {
                 anm.SetTrigger("die");
 
-                /*  
-                //Player
-                if(GetComponent<PlayerController>() != null)
-                {
-                    GetComponent<PlayerController>().enabled = false;
-                }
-
-                //Enemy
-                if(GetComponentInParent<EnemyPatrol>() != null)
-                {
-                    GetComponentInParent<EnemyPatrol>().enabled = false;
-                }
-
-                if(GetComponent<DemonEnemy>() != null)
-                {
-                    GetComponent<DemonEnemy>().enabled = false;
-                } 
-                */
-
                 foreach (Behaviour behave in components)
                 {
                     behave.enabled = false;
                 }
 
                 dead = true;
-
-                SoundManage.instance.PlaySound(deathSound);
+               if(deathSound!=null) SoundManage.instance.PlaySound(deathSound);
+                StartCoroutine(DieCoroutine());
             }
         }
     }
@@ -88,10 +93,9 @@ public class Health : MonoBehaviour
 
     private IEnumerator DieCoroutine()
     {
-        Debug.Log("die nef");
+        Debug.Log("Die coroutine started");
 
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        if(rb != null)
+        if (rb != null)
         {
             rb.velocity = Vector3.zero;
             rb.isKinematic = true;
@@ -100,11 +104,12 @@ public class Health : MonoBehaviour
         anm.SetTrigger("die");
         dead = true;
 
-        SoundManage.instance.PlaySound(deathSound);
+        if(deathSound!=null) SoundManage.instance.PlaySound(deathSound);
 
         yield return new WaitForSeconds(deathSound.length);
 
-        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+        // Respawn
+        Respawn();
     }
 
     public void Healing(float _value)
@@ -112,19 +117,33 @@ public class Health : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth + _value, 0, startingHealth);
     }
 
-    //public void Respawn()
-    //{
-    //    dead = false;
-    //    Healing(startingHealth);
-    //    anm.ResetTrigger("die");
-    //    anm.Play("Idle");
-    //    StartCoroutine(Invunerability());
+    public void Respawn()
+    {
+        Debug.Log("Respawning at position: " + respawnPosition);
 
-    //    foreach (Behaviour behave in components)
-    //    {
-    //        behave.enabled = true;
-    //    }
-    //}
+        dead = false;
+        currentHealth = startingHealth;
+        transform.position = respawnPosition;
+
+        if (rb != null)
+        {
+            rb.isKinematic = false;
+        }
+
+        if (col != null)
+        {
+            col.enabled = true;
+        }
+
+        anm.ResetTrigger("die");
+        anm.Play("Idle");
+        StartCoroutine(Invunerability());
+
+        foreach (Behaviour behave in components)
+        {
+            behave.enabled = true;
+        }
+    }
 
     private IEnumerator Invunerability()
     {
@@ -143,5 +162,14 @@ public class Health : MonoBehaviour
     private void Deactivate()
     {
         gameObject.SetActive(false);
+    }
+
+    public void SetRespawn()
+    {
+        respawnPosition = transform.position;
+    }
+    public float CurrentHealth()
+    {
+        return currentHealth;
     }
 }

@@ -22,7 +22,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButton(0) && coolDownTimer > attackCooldown && playerMovement.canAttack())
+        if (Input.GetKey(KeyCode.J) && coolDownTimer > attackCooldown && playerMovement.canAttack())
         {
             Attack();
         }

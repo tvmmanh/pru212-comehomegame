@@ -24,6 +24,7 @@ public class Score : MonoBehaviour
                 
             }
             TextMeshPro.text = this.score.ToString();
+
         }
     }
     void Update()
@@ -39,4 +40,5 @@ public class Score : MonoBehaviour
     {
         return score;
     }
+   
 }

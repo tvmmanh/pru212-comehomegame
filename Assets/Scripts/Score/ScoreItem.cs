@@ -22,6 +22,7 @@ public class ScoreItem : MonoBehaviour
         {
             var scoreManger = collision.GetComponent<Score>();
             scoreManger.SetScore(price);
+            gameObject.SetActive(false);
         }
     }
 }

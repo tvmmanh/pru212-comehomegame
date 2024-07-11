@@ -99,6 +99,7 @@ GameObject:
   - component: {fileID: 294884705975778858}
   - component: {fileID: 6282145710023741854}
   - component: {fileID: 8624415989869794983}
+  - component: {fileID: 8266437067461605741}
   m_Layer: 9
   m_Name: FrostGuardian
   m_TagString: Enemy
@@ -236,8 +237,8 @@ MonoBehaviour:
   components:
   - {fileID: 5913768899251196302}
   - {fileID: 6282145710023741854}
-  deathSound: {fileID: 0}
-  hurtSound: {fileID: 0}
+  deathSound: {fileID: 8300000, guid: fdc5152817f513644b7e25cd88dc972c, type: 3}
+  hurtSound: {fileID: 8300000, guid: 036ddffa803b44244947920bec2d7952, type: 3}
 --- !u!95 &294884705975778858
 Animator:
   serializedVersion: 5
@@ -279,7 +280,7 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 256
-  attackSound: {fileID: 0}
+  attackSound: {fileID: 8300000, guid: 9ee9e5cc6c2d7844494b7e44c1998f83, type: 3}
 --- !u!114 &8624415989869794983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,6 +294,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
+--- !u!114 &8266437067461605741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5313790214926741729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e6222211aac937448b8fe4fd2c93d15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  price: 10
+  player: {fileID: 0}
 --- !u!1 &6237535734567098477
 GameObject:
   m_ObjectHideFlags: 0

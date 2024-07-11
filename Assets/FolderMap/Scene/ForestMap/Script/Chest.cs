@@ -41,7 +41,7 @@ namespace Cainos.PixelArtPlatformer_VillageProps
                 hasBeenOpened = true;
                 Time.timeScale = 0;
 
-                var question = await FetchAsync("https://opentdb.com/api.php?amount=1");
+                var question = await FetchAsync("https://opentdb.com/api.php?amount=1&difficulty=easy&type=multiple");
    
                 question[0].incorrect_answers.Add(question[0].correct_answer);
                 questionPanel.GetComponent<QuestionManager>().DisplayQuestion(question[0].question, question[0].incorrect_answers, question[0].correct_answer, items);

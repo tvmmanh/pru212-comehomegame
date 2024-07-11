@@ -1,5 +1,6 @@
 using ComeHomeGame;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -12,7 +13,7 @@ public class SaveDataa : MonoBehaviour
 
     }
 
-    public void SaveDataOnButtonPress()
+    public void SaveDataOnButtonPress(TMP_Text notify)
     {
         if (player == null)
         {
@@ -60,10 +61,13 @@ public class SaveDataa : MonoBehaviour
         user.currentScore = scoteManager.GetScore();
 
         StartCoroutine(SaveUserData(user));
+
+        notify.text = NotifyManager.Instance.GetString();
     }
 
     IEnumerator SaveUserData(User data)
     {
+        NotifyManager notifyManager = NotifyManager.Instance;
         string jsonData = JsonUtility.ToJson(data);
         byte[] postData = System.Text.Encoding.UTF8.GetBytes(jsonData);
 
@@ -78,11 +82,11 @@ public class SaveDataa : MonoBehaviour
 
         if (webRequest.result == UnityWebRequest.Result.Success)
         {
-            Debug.Log("Data successfully saved.");
+            notifyManager.SetString("Data successfully saved.");
         }
         else
         {
-            Debug.LogError("Error saving data: " + webRequest.error);
+            notifyManager.SetString("Saving failed");
         }
     }
 }

@@ -2,7 +2,7 @@
 
 Welcome to **Home Coming**, a 2D adventure game where intellect and wisdom determine your destiny. Created by a team of four students from FPT University, this project aims to deliver a unique blend of action and learning through an engaging and enlightening experience.
 
-![Home Coming Banner](blob:https://www.facebook.com/7b232446-37ba-4893-9845-d7cd322fd326) <!-- Replace with your banner image link -->
+![Home Coming Banner](https://i.imghippo.com/files/GEIik1720677900.jpg)
 
 ## 📜 Table of Contents
 - [Project Description](#-project-description)
@@ -68,8 +68,8 @@ Navigate obstacles to reach home.
 Return to the nearest checkpoint upon defeat.
 
 ## 🎨 Art Style and Source Assets
-- **Main Character**: xxx
-- **Boss**: xxx
+- **Main Character**: Jimmy
+- **Boss**: Demon, Frost Guardian, Fire Worm, Evil Witch
 - **Build Map**: 
   - [Pixel Art Platformer - Village Props](https://assetstore.unity.com/packages/2d/environments/pixel-art-gem-pack-animated-277559)
   - [Sunny Land](https://assetstore.unity.com/packages/2d/environments/pixel-art-bush-pack-279945)
@@ -89,10 +89,10 @@ To be determined.
 
 | Name       | UniID | Role        | Position        | GitHub Profile                        |
 |------------|-------|-------------|-----------------|---------------------------------------|
-| **Trịnh Hữu Tuấn**   | **SE170219**| Developer   | Programmer      | [GitHub](https://github.com/tuanhuu3264)         |
-| **Trịnh Xuân Bình**   | **SE170233**| Developer   | Artist          | [GitHub](https://github.com/thangbinhbeo)         |
-| **Trần Văn Minh Mạnh**   | **SE161981**| Developer   | Designer        | [GitHub](https://github.com/tvmmanh)         |
-| **Trịnh Sơn Tùng**   | **SE172875**| Developer   | Project Manager | [GitHub](https://github.com/tungske123)         |
+| **Trịnh Hữu Tuấn**   | **SE170219**| Developer   | Programmer      | [tuanhuu3264](https://github.com/tuanhuu3264)         |
+| **Trịnh Xuân Bình**   | **SE170233**| Developer   | Artist          | [thangbinhbeo](https://github.com/thangbinhbeo)         |
+| **Trần Văn Minh Mạnh**   | **SE161981**| Developer   | Designer        | [tvmmanh](https://github.com/tvmmanh)         |
+| **Trịnh Sơn Tùng**   | **SE172875**| Developer   | Project Manager | [tungske123](https://github.com/tungske123)         |
 
 ## 📜 License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

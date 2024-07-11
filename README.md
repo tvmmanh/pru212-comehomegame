@@ -23,9 +23,9 @@ Engage in solving puzzles and answering thought-provoking questions to progress 
 Prepare for an adventure without bounds, where you’ll confront novel challenges and explore wonders on a journey that inspires progress and achievement.
 
 ## 👥 Characters
-- **Nhân vật chính**: The main character.
-- **Nhân vật phụ NPCs**: Includes a shopkeeper and a fairy.
-- **Loại quái**: Five types of monsters including one boss.
+- **Main Character**: The main character - Jimmy.
+- **NPCs**: Includes a shopkeeper and a fairy.
+- **Monsters**: Five types of monsters including one boss.
 
 ## 📖 Story
 ### 🧩 Theme
@@ -84,6 +84,7 @@ To be determined.
 - **Language**: C#
 - **Database**: Open Trivial Database
 - **GitHub Repository**: [Home Coming](https://github.com/tvmmanh/pru212-comehomegame)
+- **API**: [home-coming](https://api-cominghome.outfit4rent.online)
 
 ## 👥 Contributors
 

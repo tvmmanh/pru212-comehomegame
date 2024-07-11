@@ -2,7 +2,7 @@
 
 Welcome to **Home Coming**, a 2D adventure game where intellect and wisdom determine your destiny. Created by a team of four students from FPT University, this project aims to deliver a unique blend of action and learning through an engaging and enlightening experience.
 
-![Home Coming Banner](https://example.com/banner.png) <!-- Replace with your banner image link -->
+![Home Coming Banner](blob:https://www.facebook.com/7b232446-37ba-4893-9845-d7cd322fd326) <!-- Replace with your banner image link -->
 
 ## 📜 Table of Contents
 - [Project Description](#-project-description)

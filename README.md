@@ -89,9 +89,9 @@ To be determined.
 
 | Name       | UniID | Role        | Position        | GitHub Profile                        |
 |------------|-------|-------------|-----------------|---------------------------------------|
-| **Trịnh Hữu Tuấn**   | **SE170219**| Developer   | Programmer      | [tuanhuu3264](https://github.com/tuanhuu3264)         |
-| **Trịnh Xuân Bình**   | **SE170233**| Developer   | Artist          | [thangbinhbeo](https://github.com/thangbinhbeo)         |
-| **Trần Văn Minh Mạnh**   | **SE161981**| Developer   | Designer        | [tvmmanh](https://github.com/tvmmanh)         |
+| **Trịnh Hữu Tuấn**   | **SE170219**| Developer   | Logic Programmer      | [tuanhuu3264](https://github.com/tuanhuu3264)         |
+| **Trịnh Xuân Bình**   | **SE170233**| Developer   | Character Builder          | [thangbinhbeo](https://github.com/thangbinhbeo)         |
+| **Trần Văn Minh Mạnh**   | **SE161981**| Developer   | Map Builder        | [tvmmanh](https://github.com/tvmmanh)         |
 | **Trịnh Sơn Tùng**   | **SE172875**| Developer   | Project Manager | [tungske123](https://github.com/tungske123)         |
 
 ## 📜 License

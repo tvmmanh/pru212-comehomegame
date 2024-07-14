@@ -94,6 +94,10 @@ public class Login : MonoBehaviour
             return null;
         }
     }
+    public void Register()
+    {
+        SceneManager.LoadScene(6);
+    }
 }
 
 [System.Serializable]

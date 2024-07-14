@@ -1,6 +1,7 @@
 
 using Cainos.LucidEditor;
 using System.Collections.Generic;
+using System.Net;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,6 +10,8 @@ public class QuestionManager : MonoBehaviour
 {
     public TMP_Text questionText;
     public Button[] choiceButtons;
+    public AudioClip audioCorrectAnswer;
+    public AudioClip audioWrongAnswer;
     private string correctAnswer;
     private GameObject[] items;
     private void Start()
@@ -23,12 +26,13 @@ public class QuestionManager : MonoBehaviour
     public void DisplayQuestion(string question, List<string> choices, string correctAnswer, GameObject[] items )
     {   
         this.items = items;
-        questionText.text = question;
-        this.correctAnswer = correctAnswer;
+        questionText.text = WebUtility.HtmlDecode(question);
+        this.correctAnswer = WebUtility.HtmlDecode(correctAnswer);
         for (int i = 0; i < choices.Count; i++)
         {
-            choiceButtons[i].GetComponentInChildren<TMP_Text>().text = choices[i]; 
+            choiceButtons[i].GetComponentInChildren<TMP_Text>().text = WebUtility.HtmlDecode(choices[i]); 
         }
+        choiceButtons[1].GetComponentInChildren<TMP_Text>().text= WebUtility.HtmlDecode(correctAnswer);
         gameObject.SetActive(true); 
     }
 
@@ -38,20 +42,14 @@ public class QuestionManager : MonoBehaviour
 
         if (selectedAnswer == correctAnswer)
         {
-
+            SoundManage.instance.PlaySound(audioCorrectAnswer);
             foreach (var item in items)
             {
                 item.GetComponent<ThrowItem>().Display();
             }
         }
-        else
-        {
+        else SoundManage.instance.PlaySound(audioWrongAnswer);
 
-            foreach (var item in items)
-            {
-                item.GetComponent<ThrowItem>().Display();
-            }
-        }
         Time.timeScale = 1;
         
         gameObject.SetActive(false);

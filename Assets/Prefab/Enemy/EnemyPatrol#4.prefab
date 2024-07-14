@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 859184741929798854}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 181.36, y: -14.86, z: 0}
+  m_LocalPosition: {x: 185.29036, y: -13.891569, z: 0}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 3390854318922554593}
   - component: {fileID: 3938485168291024144}
   - component: {fileID: 1951624108425233694}
+  - component: {fileID: 6151097665284267428}
   m_Layer: 9
   m_Name: Wizard
   m_TagString: Enemy
@@ -146,7 +147,7 @@ Transform:
   m_GameObject: {fileID: 8998419682541874993}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.3099976, y: 1.3099995, z: 0}
+  m_LocalPosition: {x: -1.7, y: -0, z: 0}
   m_LocalScale: {x: -6, y: 6, z: 6}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -288,8 +289,8 @@ MonoBehaviour:
   components:
   - {fileID: 3938485168291024144}
   - {fileID: 4882030913585569533}
-  deathSound: {fileID: 0}
-  hurtSound: {fileID: 0}
+  deathSound: {fileID: 8300000, guid: 6df1716c820cac743adaa9c797abbfc7, type: 3}
+  hurtSound: {fileID: 8300000, guid: a4590838170e5b94687614d18464858b, type: 3}
 --- !u!114 &3938485168291024144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -310,7 +311,7 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 256
-  attackSound: {fileID: 0}
+  attackSound: {fileID: 8300000, guid: 4067ebc0b286afa4ab54f8216c990c89, type: 3}
 --- !u!114 &1951624108425233694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324,3 +325,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
+--- !u!114 &6151097665284267428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8998419682541874993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e6222211aac937448b8fe4fd2c93d15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  price: 2
+  player: {fileID: 0}

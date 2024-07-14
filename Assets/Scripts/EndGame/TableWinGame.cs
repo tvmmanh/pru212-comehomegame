@@ -4,6 +4,8 @@ using TMPro;
 using UnityEngine.Networking;
 using UnityEngine;
 using System.Collections;
+using UnityEditor.SearchService;
+using UnityEngine.SceneManagement;
 
 public class TableWinGame : MonoBehaviour
 {
@@ -55,6 +57,12 @@ public class TableWinGame : MonoBehaviour
         YourScore.text = response.score.ToString();
         YourRank.text = response.rank.ToString();
         
+    }
+    public void BackToMenu()
+    {
+        DataManager dataManager = DataManager.Instance;
+        dataManager.Type = "";
+        SceneManager.LoadScene(1);
     }
 }
 

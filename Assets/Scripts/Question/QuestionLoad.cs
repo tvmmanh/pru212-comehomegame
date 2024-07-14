@@ -10,6 +10,8 @@ public class QuestionManager : MonoBehaviour
 {
     public TMP_Text questionText;
     public Button[] choiceButtons;
+    public AudioClip audioCorrectAnswer;
+    public AudioClip audioWrongAnswer;
     private string correctAnswer;
     private GameObject[] items;
     private void Start()
@@ -30,6 +32,7 @@ public class QuestionManager : MonoBehaviour
         {
             choiceButtons[i].GetComponentInChildren<TMP_Text>().text = WebUtility.HtmlDecode(choices[i]); 
         }
+        choiceButtons[1].GetComponentInChildren<TMP_Text>().text= WebUtility.HtmlDecode(correctAnswer);
         gameObject.SetActive(true); 
     }
 
@@ -39,20 +42,14 @@ public class QuestionManager : MonoBehaviour
 
         if (selectedAnswer == correctAnswer)
         {
-
+            SoundManage.instance.PlaySound(audioCorrectAnswer);
             foreach (var item in items)
             {
                 item.GetComponent<ThrowItem>().Display();
             }
         }
-        else
-        {
+        else SoundManage.instance.PlaySound(audioWrongAnswer);
 
-            foreach (var item in items)
-            {
-                item.GetComponent<ThrowItem>().Display();
-            }
-        }
         Time.timeScale = 1;
         
         gameObject.SetActive(false);
